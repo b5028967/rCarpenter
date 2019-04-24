@@ -5,9 +5,9 @@
 {% for product in object_list %}
 
 <div>
-
+	<img src="{{ object.photo.url }}" width="250"></div>
 	<div class="col-md-9">
-	<h3><a href="{% url 'product-detail' product.id %}">{{ product.name }}</a></h3>
+	<h2><a href="{% url 'product-detail' product.id %}">{{ product.name }}</a></h2>
 	<h4 class="text-muted">{{ product.brand }}</h4>
 	<p>{{ product.description }}</p>
 </div>

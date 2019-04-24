@@ -1,0 +1,14 @@
+{% extends "reviews/base.html" %}
+{% block content %}
+<h1> Product Review </h1>
+	<div class="review">
+		<div><img class="rounded-circle account-img" src="{{ user.profile.image.url }}" width="150"></div>
+		<div class="review-info">
+		<h6 class="text-success">Author: {{ review.author }}</h6>
+		<p>Rating: {{ review.rating }}</p>
+		<p>Review Text: {{ review.review_text }}</p>
+		<p>Date: {{ review.date }}</p>
+	</div>
+</div>
+<a href="{% url 'product-detail' review.product.pk %}" classic="mt-2 btn btn-outline-primary">Back to Products</a>
+{% endblock content %}
