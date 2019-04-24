@@ -1,0 +1,30 @@
+{% extends "reviews/base.html" %}
+{% block content %}
+<h1> Product Details </h1>
+
+<div>
+	<img src="{{ object.photo.url }}" width="250"></div>
+	<div class="col-md-9">
+		<h2 class="product-name mb-0">{{ object.name }}</h2>
+	<p>Brand: {{ product.brand }}</p>
+	<p>Description: {{ product.description }}</p>
+	<p>Category: {{ product.category }}</p>
+	<p>Average Cost: {{ product.avg_cost}}</p>
+	<p>Date Released: {{ product.date_released }}</p>
+</div>
+
+<h2> Product Reviews </h2>
+	<div class="review">
+		{% for review in object.review_set.all %}
+		{{ review }}
+		<div><img class="rounded-circle account-img" src="{{ user.profile.image.url }}" width="150"></div>
+		<div class="review-info">
+		<p>Author: {{ review.author }}</p>
+		<p>Rating: {{ review.rating }}</p>
+		<p>Review Text: {{ review.review_text }}</p>
+		<p>Date: {{ review.date }}</p>
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock content %}

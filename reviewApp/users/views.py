@@ -29,13 +29,13 @@ def profile(request):
 
 		if u_form.is_valid():
 			u_form.save()
-			message.success(request, f'User details have been edited')
+			messages.success(request, f'User details have been edited')
 
 			return redirect('profile')
 
 		if p_form.is_valid():
 			p_form.save()
-			message.success(request, f'Account details have been edited')
+			messages.success(request, f'Account details have been edited')
 
 			return redirect('profile')
 	
