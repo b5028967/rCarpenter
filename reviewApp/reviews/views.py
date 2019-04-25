@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .models import Product, Review
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from .forms import ContactForm
 
 # Create your views here.
 def home(request):
@@ -11,7 +12,8 @@ def about(request):
 	return render(request, 'reviews/about.html',{'title':'About'})
 
 def contact(request):
-	return render(request, 'reviews/contact.html',{'title':'Contact'})
+	form = ContactForm()
+	return render(request, 'reviews/contact.html',{'title':'Contact', 'form':form})
 
 class ProductListView(ListView):
 	model = Product
@@ -39,6 +41,16 @@ class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 	def form_valid(self, form):
 		return super().form_valid(form)
+
+	def test_func(self):
+		review = self.get_object()
+		if self.request.user == review.author:
+			return True
+		return False
+
+class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model = Review 
+	success_url = '/products'
 
 	def test_func(self):
 		review = self.get_object()
